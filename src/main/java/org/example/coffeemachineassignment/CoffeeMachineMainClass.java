@@ -33,11 +33,8 @@ public class CoffeeMachineMainClass {
             e.printStackTrace();
         }
 
-        coffeeMachine.refillIngredient("hot_water", 1000);
-        coffeeMachine.refillIngredient("hot_milk", 1000);
-        coffeeMachine.refillIngredient("ginger_syrup", 1000);
-        coffeeMachine.refillIngredient("sugar_syrup", 1000);
-        coffeeMachine.refillIngredient("tea_leaves_syrup", 1000);
+        coffeeMachine.refillAllIngredient( 1000);
+
         runTestForGivenOutletsAndBeverages(1, beveragesToPrepare,coffeeMachine);
         System.out.println("========Test Case 2 End=========");
 
@@ -49,14 +46,11 @@ public class CoffeeMachineMainClass {
             e.printStackTrace();
         }
 
-        coffeeMachine.refillIngredient("hot_water", 1000);
-        coffeeMachine.refillIngredient("hot_milk", 1000);
-        coffeeMachine.refillIngredient("ginger_syrup", 1000);
-        coffeeMachine.refillIngredient("sugar_syrup", 1000);
-        coffeeMachine.refillIngredient("tea_leaves_syrup", 1000);
+        coffeeMachine.refillAllIngredient( 1000);
 
         //added green mixture
-        coffeeMachine.refillIngredient("green_mixture", 500);
+        coffeeMachine.refillIngredient("green_mixture",
+                500);
         runTestForGivenOutletsAndBeverages(1, beveragesToPrepare,coffeeMachine);
         System.out.println("========Test Case 3 End=========");
 

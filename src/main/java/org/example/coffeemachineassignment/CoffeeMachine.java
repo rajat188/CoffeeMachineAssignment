@@ -101,7 +101,7 @@ public class CoffeeMachine {
             if(availableRecipes.contains(jsonIngredientsMapEntry.getKey())){
                 throw new Exception("Ingredients Name should be unique for each ingredients. "+jsonIngredientsMapEntry.getKey() + "already exists.");
             }
-            availableIngredientsWithQuantity.put(jsonIngredientsMapEntry.getKey(), jsonIngredientsMapEntry.getValue());
+            availableIngredientsWithQuantity.put(jsonIngredientsMapEntry.getKey(), Math.min(jsonIngredientsMapEntry.getValue(),ingredientsContainerSize));
         }
 
     }
@@ -163,6 +163,13 @@ public class CoffeeMachine {
         } else {
             System.out.println("Refilling caused spillage as qunatity added was more than container Size. " + ingredientName + " refilled.");
             availableIngredientsWithQuantity.put(ingredientName, ingredientsContainerSize);
+        }
+
+    }
+
+    public void refillAllIngredient(int qunatity){
+        for(Map.Entry<String, Integer> availableIngredients : availableIngredientsWithQuantity.entrySet()) {
+            refillIngredient(availableIngredients.getKey(), availableIngredients.getValue());
         }
 
     }
