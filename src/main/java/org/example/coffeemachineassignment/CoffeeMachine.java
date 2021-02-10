@@ -159,22 +159,26 @@ public class CoffeeMachine {
 
     //Method to refill a particular ingredient
     public void refillIngredient(String ingredientName, int qunatity){
-        int availableQuantity = availableIngredientsWithQuantity.getOrDefault(ingredientName,0);
-        if (ingredientsContainerSize - availableQuantity >= qunatity) {
-            System.out.println(ingredientName + " refilled.");
-            availableIngredientsWithQuantity.put(ingredientName, availableQuantity + qunatity);
-        } else {
-            System.out.println("Refilling caused spillage as qunatity added was more than container Size. " + ingredientName + " refilled.");
-            availableIngredientsWithQuantity.put(ingredientName, ingredientsContainerSize);
+        synchronized (availableIngredientsWithQuantity){
+            int availableQuantity = availableIngredientsWithQuantity.getOrDefault(ingredientName,0);
+            if (ingredientsContainerSize - availableQuantity >= qunatity) {
+                System.out.println(ingredientName + " refilled.");
+                availableIngredientsWithQuantity.put(ingredientName, availableQuantity + qunatity);
+            } else {
+                System.out.println("Refilling caused spillage as qunatity added was more than container Size. " + ingredientName + " refilled.");
+                availableIngredientsWithQuantity.put(ingredientName, ingredientsContainerSize);
+            }
         }
-
     }
 
     //Method to refill a all the ingredients
     public void refillAllIngredient(int qunatity){
-        for(Map.Entry<String, Integer> availableIngredients : availableIngredientsWithQuantity.entrySet()) {
-            refillIngredient(availableIngredients.getKey(), availableIngredients.getValue());
+        synchronized (availableIngredientsWithQuantity){
+            for(Map.Entry<String, Integer> availableIngredients : availableIngredientsWithQuantity.entrySet()) {
+                refillIngredient(availableIngredients.getKey(), availableIngredients.getValue());
+            }
         }
+
     }
 
 
