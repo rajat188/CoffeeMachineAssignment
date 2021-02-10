@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /*
 *   Coffee Machine
 *   Initialize machine with no of outlets(required), maximum ingredients container(optional : if not defined max will be taken) and maximum ingredients container size(optional : if not defined max will be taken)
+*   I have used Lombok, to enable lombok in intellij go to Setting and enable Annotation Processor
 */
 
 @Getter
