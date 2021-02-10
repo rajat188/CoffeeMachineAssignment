@@ -106,6 +106,7 @@ public class CoffeeMachine {
 
     }
 
+    // Method to prepare beverages
     public void prepareBeverage(String beverageName){
         BeverageRecipe recipe = availableRecipes.getOrDefault(beverageName, null);
 
@@ -155,6 +156,7 @@ public class CoffeeMachine {
         }
     }
 
+    //Method to refill a particular ingredient
     public void refillIngredient(String ingredientName, int qunatity){
         int availableQuantity = availableIngredientsWithQuantity.getOrDefault(ingredientName,0);
         if (ingredientsContainerSize - availableQuantity >= qunatity) {
@@ -167,11 +169,11 @@ public class CoffeeMachine {
 
     }
 
+    //Method to refill a all the ingredients
     public void refillAllIngredient(int qunatity){
         for(Map.Entry<String, Integer> availableIngredients : availableIngredientsWithQuantity.entrySet()) {
             refillIngredient(availableIngredients.getKey(), availableIngredients.getValue());
         }
-
     }
 
 
