@@ -26,12 +26,10 @@ public class CoffeeMachineTest {
         CoffeeMachine coffeeMachine = null;
         try {
             coffeeMachine = new CoffeeMachine(3);
+            runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
-
-
     }
 
     //Coffee Machine having 3 Outlets and 4 beverages to prepare with sufficient ingredients
@@ -41,39 +39,58 @@ public class CoffeeMachineTest {
         CoffeeMachine coffeeMachine = null;
         try {
             coffeeMachine = new CoffeeMachine(3);
+            coffeeMachine.refillAllIngredient( 1000);
+            runTestForGivenOutletsAndBeverages(3, beveragesToPrepare, coffeeMachine);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        coffeeMachine.refillIngredient("hot_water", 1000);
-        coffeeMachine.refillIngredient("hot_milk", 1000);
-        coffeeMachine.refillIngredient("ginger_syrup", 1000);
-        coffeeMachine.refillIngredient("sugar_syrup", 1000);
-        coffeeMachine.refillIngredient("tea_leaves_syrup", 1000);
-
-        runTestForGivenOutletsAndBeverages(3, beveragesToPrepare, coffeeMachine);
-
     }
 
     //Coffee Machine having 3 Outlets and 4 beverages and adding missing green_mixture ingredients
     @Test
-    public void threeOutlet4BeverageIngredientsMissing(){
+    public void threeOutlet4BeverageMissingIngredientsAdded(){
         List<String> beveragesToPrepare = new ArrayList<>(Arrays.asList("hot_tea","hot_coffee","black_tea", "elaichi_tea"));
         CoffeeMachine coffeeMachine = null;
         try {
             coffeeMachine = new CoffeeMachine(3);
+            coffeeMachine.refillAllIngredient(1000);
+            coffeeMachine.refillIngredient("green_mixture", 1000);
+            runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        coffeeMachine.refillIngredient("hot_water", 1000);
-        coffeeMachine.refillIngredient("hot_milk", 1000);
-        coffeeMachine.refillIngredient("ginger_syrup", 1000);
-        coffeeMachine.refillIngredient("sugar_syrup", 1000);
-        coffeeMachine.refillIngredient("tea_leaves_syrup", 1000);
-        coffeeMachine.refillIngredient("green_mixture", 1000);
-        runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
+    }
 
+    //Coffee Machine having 3 Outlets and 4 beverages and adding missing green_mixture ingredients
+    //will throw exception as more ingredients than available container
+    @Test
+    public void threeOutlet4BeverageWithContainerCountAndSize(){
+        List<String> beveragesToPrepare = new ArrayList<>(Arrays.asList("hot_tea","hot_coffee","black_tea", "elaichi_tea"));
+        CoffeeMachine coffeeMachine = null;
+        try {
+            coffeeMachine = new CoffeeMachine(3,10,1000);
+            coffeeMachine.refillAllIngredient( 1000);
+            coffeeMachine.refillIngredient("green_mixture", 1000);
+            runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    //Coffee Machine having 3 Outlets and 4 beverages and initializing with all parmas
+    //will throw exception as more ingredients than available container
+    @Test
+    public void threeOutlet4BeverageWithAllParams(){
+        List<String> beveragesToPrepare = new ArrayList<>(Arrays.asList("hot_tea","hot_coffee","black_tea", "elaichi_tea"));
+        CoffeeMachine coffeeMachine = null;
+        try {
+            coffeeMachine = new CoffeeMachine(3,4,1000);
+            coffeeMachine.refillAllIngredient( 1000);
+            coffeeMachine.refillIngredient("green_mixture", 1000);
+            runTestForGivenOutletsAndBeverages(3, beveragesToPrepare,coffeeMachine);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void runTestForGivenOutletsAndBeverages(int n, List<String> beveragesToPrepare, CoffeeMachine coffeeMachine){
